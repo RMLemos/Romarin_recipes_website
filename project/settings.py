@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db_sarasvati',
+        'NAME': 'romarin_db',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
