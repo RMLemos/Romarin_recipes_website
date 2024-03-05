@@ -40,6 +40,16 @@
   
     --font-primary: 'Roboto', sans-serif;
     --font-headings: "Raleway", Helvetica, sans-serif;
+
+    /* Font-Sizes */
+    /* https://royalfig.github.io/fluid-typography-calculator/ */
+    --fs-smlst: clamp(1.2rem, 1.092307692307692rem + 0.256410256410256vw, 1.4rem);
+    --fs-smlr: clamp(1.4rem, 1.292307692307692rem + 0.2564102564102566vw, 1.6rem);
+    --fs-sm: clamp(1.6rem, 1.4923076923076923rem + 0.25641025641025633vw, 1.8rem);
+    --fs-base: clamp(1.8rem, 1.6923076923076923rem + 0.25641025641025633vw, 2rem);
+    --fs-bg: clamp(2rem, 1.7846153846153847rem + 0.5128205128205127vw, 2.4rem);
+    --fs-bgr: clamp(2.4rem, 1.969230769230769rem + 1.025641025641026vw, 3.2rem);
+    --fs-bgst: clamp(3.2rem, 2.876923076923rem + 0.7692307692307687vw, 3.8rem);
   
     --spacing-gutter-medium: 3rem;
     --spacing-gutter-large: 4rem;
@@ -56,7 +66,7 @@
   }
   
   body {
-    font-size: 1.6rem;
+    font-size:var(--fs-smlr);
     font-family: var(--font-primary);
     background: var(--color-gray-0);
     color: var(--color-dark-text);
@@ -71,13 +81,25 @@
     font-family: var(--font-headings);
   }
 
+  h2{
+    font-size: var(--fs-bgr);
+  }
+
+  h4{
+    font-size: var(--fs-base);
+  }
+
   img {
     max-width: 100%;
   }
   
   a {
-    color: var(--color-primary);
+    color: #dfab92;
     text-decoration: none;
+  }
+
+  a:hover{
+    color: #eb8452;
   }
 
   .container {
@@ -109,6 +131,62 @@
     background: var(--color-gray-2);
     background-image: linear-gradient(to right, var(--color-gray-1), var(--color-gray-2), var(--color-gray-1));
   }
+
+  /* Categories */
+
+  .category-title-content{
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .category-title{
+    text-align: center;
+    margin-bottom: var(--spacing-gutter-medium);
+  }
+  
+  .text-center{
+    text-align: center;
+  }
+
+  .category-content-list {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to next line if needed */
+    gap: var(--spacing-gutter-large);
+    justify-content: center; /* Distribute items evenly in the container */
+  }
+
+  .category {
+      background: #dfab92;
+      box-shadow: -2px 2px 5px rgba(0, 0, 0, .2);
+      transform: scale(1);
+      transition: all 300ms ease-in-out;
+      border-radius: .4rem;
+      overflow: hidden;
+      padding: 1.5rem 2rem;
+  }
+
+  .category-list-item {
+      max-width: fit-content;
+      height: fit-content;
+  }
+  .category-list-item:hover {
+      transform: scale(1.02);
+      box-shadow: -8px 8px 18px rgba(0, 0, 0, .25);
+  }
+
+  .cat-link{
+    text-decoration: none;
+    color: var(--color-black);
+  }
+
+  .cat-link h4{
+      font-weight: 700;
+      font-size: 14px;
+  }
+
 
   /* Search Form */
 
@@ -142,7 +220,7 @@
     }
 
     .search-button img {
-      width: 12px; /* Defina o tamanho da imagem conforme necessário */
+      width: 12px; 
     }
 
     .search-button:focus {
@@ -159,8 +237,15 @@
         color: #eb8452;
     }
 
+  /* Title */
+
+  .section-title {
+    text-align: center; /* Center the title text horizontally */
+    margin-bottom: var(--spacing-gutter-medium); /* Add some space below the title */
+    font-size: var(--fs-bgr);
+  }
+
   /* Recipe Card */
-    
   .main-content {
     padding-top: 0;
   }
@@ -182,10 +267,12 @@
   .recipe img {
       max-width: 100%;
   }
+
   .recipe-list-item {
-      max-width: 64rem;
-      height: fit-content;
+    max-width: 84rem;
+    margin: 0 auto;
   }
+
   .recipe-list-item:hover {
       transform: scale(1.02);
       box-shadow: -8px 8px 18px rgba(0, 0, 0, .25);
@@ -268,3 +355,15 @@
     font-weight: 500;
     text-align: center;
   }
+
+  /* Single recipe */
+
+  .main-content-detail {
+    max-width: 84rem;
+    margin: auto;
+  }
+
+  .recipe-cover{
+    text-align: center;
+  }
+  

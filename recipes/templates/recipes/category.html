@@ -1,43 +1,20 @@
 {% extends 'global/main_layout.html' %}
 {% load static %}
 
-{% block title %}Home | {% endblock title %}
+{% block title %}Category | {% endblock title %}
 
 {% block content %}
 
-    <div class="search-container">
-        <div class="container">
-            <form action="" class="search-form">
-                <input type="search" class="search-input" name="search" placeholder="Search for a recipe">
-                <button type="submit" class="search-button"><img src= {% static 'global/images/find_btn.png' %}></button>
-            </form>
-        </div>
-    </div>   
-
+    
     <main class="main-content-container">
         <div class="category-title-content content">
             <div class="category-title">
-                <h2>By Category</h2>
+                <h1>Recipes for {{ category.name }} </h1>
             </div>
         </div>
 
-        <div class="main-content category-content-list container">
-            {% for category in categories %}
-                <div class="category category-list-item">
-                    <a class="cat-link" href="{% url 'recipes:category' category.slug %}">
-                        <h4>{{ category.name }}</h4>
-                    </a>
-                </div>
-            {% empty %}
-                <span class="text-center">
-                    </h6>No recipes found</h6>
-                </span>
-            {% endfor %}
-        </div>
-    </main>
-
     <main class="main-content-container">
-        <h2 class="section-title">Latest Recipes</h2>
+
         <div class="main-content main-content-list container">
             {% for recipe in recipes %}
                 <div class="recipe recipe-list-item">
@@ -65,7 +42,6 @@
                                 {{ recipe.author.first_name }} {{ recipe.author.last_name }}
                             </span>
                     {% endif %}
-                    </div>
                     <a href="{% url 'recipes:recipe' recipe.id %}" class='card-link'></a>
                 </div>
             {% empty %}

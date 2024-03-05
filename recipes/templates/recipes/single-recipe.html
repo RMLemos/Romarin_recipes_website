@@ -1,8 +1,55 @@
 {% extends 'global/main_layout.html' %}
 {% load static %}
 
+{% block title %} {{ recipe.title }} | {% endblock title %}
+
 {% block content %}
-    <main class="main-content-container">
-    </main>
+    <div class="main-content main-content-detail container">
+            <div class="recipe-cover">
+                <img src="{{ recipe.cover.url }}" alt="Image for {{ recipe.title }}">
+            </div>
+        <div class="recipe-title-container">
+            <h2 class="recipe-title">
+                    {{ recipe.title }}
+            </h2>
+        </div>
+        <div class="recipe-author">
+            {% if recipe.author is not None %}
+                <span class="recipe-author-item">
+                    {{ recipe.author.first_name }} {{ recipe.author.last_name }}
+                </span>
+            {% endif %}
+            <span class="recipe-author-item">
+                {{ recipe.created_at|date:"d/m/Y" }}
+            </span>
+            {% if recipe.category is not None %}
+                <span class="recipe-author-item">
+                    <a href="{% url 'recipes:category' category.slug %}">
+                        <span>{{ recipe.category.name }}</span>
+                    </a>
+                </span>
+            {% endif %}
+        </div>
+        <div class="recipe-content">
+            <p>{{ recipe.description }}</p>
+        </div>
+        <div class="recipe-meta-container">
+            <div class="recipe-meta recipe-preparation">
+                <h3 class="recipe-meta-title">Preparation time</h3>
+                <div class="recipe-meta-text">
+                    {{ recipe.preparation_time }} {{ recipe.preparation_time_unit }}
+                </div>
+            </div>
+            <div class="recipe-meta recipe-servings">
+                <h3 class="recipe-meta-title">Servings</h3>
+                <div class="recipe-meta-text">
+                    {{ recipe.servings }} {{ recipe.servings_unit }}
+                </div>
+            </div>
+            <div class="preparation-steps">
+                {{ recipe.preparation_steps|linebreaksbr }}
+            </div>
+        </div>
+    </div>
 
 {% endblock content %}

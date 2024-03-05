@@ -36,7 +36,10 @@ signals.pre_save.connect(category_pre_save, sender=Category)
 class Recipe(models.Model):
     title = models.CharField(max_length=65)
     description = models.CharField(max_length=165)
-    slug = models.SlugField()
+    slug = models.SlugField(
+        unique=True, default=None,
+        null=True, blank=True, max_length=150,
+    )
     preparation_time = models.IntegerField()
     preparation_time_unit = models.CharField(max_length=65)
     servings = models.IntegerField()
@@ -45,8 +48,7 @@ class Recipe(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False)
-    cover = models.ImageField(
-        upload_to='recipes/covers/', blank=True, default='')
+    cover = models.ImageField(upload_to='recipes/covers/')
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True, blank=True,
         default=None,
@@ -57,15 +59,15 @@ class Recipe(models.Model):
         return self.title
     
     def save(self, *args, **kwargs):
-        current_picture_name = str(self.picture.name)
+        current_cover_name = str(self.cover.name)
         super_save = super().save(*args, **kwargs)
-        picture_changed = False
+        cover_changed = False
 
-        if self.picture:
-            picture_changed = current_picture_name != self.picture.name
+        if self.cover:
+            cover_changed = current_cover_name != self.cover.name
 
-        if picture_changed:
-            resize_image(self.picture, 900, True, 70)
+        if cover_changed:
+            resize_image(self.cover, 900, True, 70)
 
         return super_save
 
