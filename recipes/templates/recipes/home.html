@@ -7,8 +7,8 @@
 
     <div class="search-container">
         <div class="container">
-            <form action="" class="search-form">
-                <input type="search" class="search-input" name="search" placeholder="Search for a recipe">
+            <form action="{% url 'recipes:search' %}" method="GET" class="search-form">
+                <input type="search" class="search-input" name="q" value="{{ search_term }}" placeholder="Search for a recipe">
                 <button type="submit" class="search-button"><img src= {% static 'global/images/find_btn.png' %}></button>
             </form>
         </div>

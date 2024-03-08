@@ -145,6 +145,7 @@
   .category-title{
     text-align: center;
     margin-bottom: var(--spacing-gutter-medium);
+    color: red;
   }
   
   .text-center{
@@ -319,10 +320,10 @@
 
   .categorytag {
     position: absolute;
-    top: 72%; 
-    left: 17%; 
+    top: 5%; 
+    left: 9%; 
     transform: translate(-50%, -50%); 
-    background-color: rgba(255, 255, 255, 0.8); 
+    background-color: #dfab92; 
     padding: 8px 16px; 
     border-radius: 4px; 
     font-size: 14px; 
@@ -368,3 +369,7 @@
     text-align: center;
   }
   
+  .preparation-steps {
+    margin-top: 15px;
+    padding: var(--spacing-gutter-medium);
+  }
