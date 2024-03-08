@@ -1,13 +1,19 @@
-from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
+from django.core.paginator import Paginator
+from django.db.models import Q
 from recipes.models import Category, Recipe
+from utils.pagination import make_pagination
+
+PER_PAGE = 9
 
 def home(request):
     categories = Category.objects.order_by('name')
     recipes = Recipe.objects.filter(is_published=True).order_by('-id')
+    page_obj, pagination_range = make_pagination(request, recipes, PER_PAGE)
     context={
         'categories': categories,
-        'recipes': recipes,
+        'recipes': page_obj,
+        'pagination_range': pagination_range
     }
 
     return render(request, 'recipes/home.html', context)
@@ -18,8 +24,11 @@ def category(request, slug):
         category=category,
         is_published=True,
     ).order_by('-id')
+
+    page_obj, pagination_range = make_pagination(request, recipes, PER_PAGE)
     context={
-        'recipes': recipes,
+        'recipes':  page_obj,
+        'pagination_range': pagination_range,
         'category': category,
     }
 
@@ -57,30 +66,14 @@ def search(request):
         ).order_by('-id')
         categories = []  # Não há categorias para passar para o template
 
+    page_obj, pagination_range = make_pagination(request, recipes, PER_PAGE)
+
     context = {
         'page_title': f'Search for "{search_term}" |',
         'search_term': search_term,
-        'recipes': recipes,
+        'recipes': page_obj,
+        'pagination_range': pagination_range,
         'categories': categories,
-
     }
 
     return render(request, 'recipes/search.html', context)
-
-
-'''
-    recipes = Recipe.objects.filter(
-        Q(title__icontains=search_term) | Q(description__icontains=search_term),
-        category__name__icontains=search_term,  # Filter by category name
-        is_published=True
-    ).order_by('-id')
-
-    context = {
-        'page_title': f'Search for "{search_term}" |',
-        'search_term': search_term,
-        'recipes': recipes,
-    }
-
-    return render(request, 'recipes/search.html', context)
-'''
-    
