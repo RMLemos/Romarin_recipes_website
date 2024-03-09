@@ -4,16 +4,8 @@
 
 {% block content %}
 
-    
     <main class="main-content-container">
-        <div class="category-title-content content">
-            <div class="category-title">
-                <h1>Recipes for {{ category.name }} </h1>
-            </div>
-        </div>
-
-    <main class="main-content-container">
-
+        <h2 class="section-title">Recipes for {{ category.name }} </h2>
         <div class="main-content main-content-list container">
             {% for recipe in recipes %}
                 <div class="recipe recipe-list-item">
@@ -28,10 +20,10 @@
                         <span class="recipe-meta-text"> 
                             {{ recipe.preparation_time }} {{ recipe.preparation_time_unit }}
                         </span>
-                        <span "recipe-meta-text">
+                        <span class="recipe-meta-text">
                             -
                         </span>
-                        <span "recipe-meta-text">
+                        <span class="recipe-meta-text">
                             {{ recipe.servings }} {{ recipe.servings_unit }}
                         </span>
                     </div>
@@ -41,6 +33,7 @@
                                 {{ recipe.author.first_name }} {{ recipe.author.last_name }}
                             </span>
                     {% endif %}
+                    </div>
                     <a href="{% url 'recipes:recipe' recipe.id %}" class='card-link'></a>
                 </div>
             {% empty %}

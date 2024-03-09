@@ -51,6 +51,7 @@
     --fs-bgr: clamp(2.4rem, 1.969230769230769rem + 1.025641025641026vw, 3.2rem);
     --fs-bgst: clamp(3.2rem, 2.876923076923rem + 0.7692307692307687vw, 3.8rem);
   
+    --spacing: 1.5rem;
     --spacing-gutter-medium: 3rem;
     --spacing-gutter-large: 4rem;
   }
@@ -70,6 +71,7 @@
     font-family: var(--font-primary);
     background: var(--color-gray-0);
     color: var(--color-dark-text);
+    height: 100%;
   }
   
   h1,
@@ -107,7 +109,7 @@
     margin: 0 auto;
     padding: var(--spacing-gutter-medium);
   }
-  
+
   .main-header-container {
     background: var(--color-gray-0);
   }
@@ -412,4 +414,96 @@
     background: #eb8452;
   }
   
+  /* Forms Login / Register */
+
+  .form-wrapper {
+    max-width: 45rem;
+    margin: var(--spacing) auto;
+  }
   
+  .form-content {
+    margin: var(--spacing-gutter-medium) 0;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: var(--spacing);
+  }
+  .errorlist {
+    list-style: none;
+    font-size: var(--fs-smlst);
+    color: tomato;
+  }
+
+  .errorlist.nonfield {
+    color: inherit;
+  }
+
+  .error-message{
+    font-size: var(--fs-smlst);
+    color: tomato;
+  }
+  
+  .form-group span {
+    margin: 1em 0;
+  }
+  
+  .form-group .help-text,
+  .form-group .help-text ~ ul {
+    margin: 0;
+    font-size: var(--fs-smlst);
+    list-style: none;
+  }
+  
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    padding: 1rem;
+    border-radius: var(--default-border-radius);
+    border: 1px solid #dfab92;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    outline: none;
+    box-shadow: 0 0 5px #eb8452;
+  }
+  
+  .form-group label {
+    font-size: var(--fs-smlst);
+    margin-bottom: .5rem;
+  }
+  
+  .btn {
+    background-color: #dfab92;
+    font-weight: bold;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: var(--default-border-radius);
+    cursor: pointer;
+    transition: filter 300ms ease-in-out;
+  }
+  
+  .btn:hover {
+    filter: brightness(90%);
+  }
+  
+  .btn:focus,
+  .btn:active {
+    filter: brightness(80%);
+    box-shadow: 0 0 5px #dfab92;
+  }
+  
+  @media (max-width: 600px) {
+    .main-content-list,
+    .form-content-grid {
+      grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+    }
+
+    .form-wrapper {
+      max-width: 100%;  /* Adjusts to full width on smaller screens */
+      margin: var(--spacing) auto;
+    } 
+  }
