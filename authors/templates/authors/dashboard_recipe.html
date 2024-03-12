@@ -1,0 +1,47 @@
+{% extends 'global/main_layout.html' %}
+
+{% block content %}
+
+<div class="form-wrapper">
+
+  <h2 class="text-center">Add Recipe</h2>
+
+  <form 
+    action="{{ form_action }}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+
+    <div class="form-content {{ field.field.widget }}">
+      {% for field in form %}
+        <div class="form-group {{ field.field.widget.attrs.class }}">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{field}}
+
+          {% if field.errors %}
+            <span class="error-message">
+              {% for error in field.errors %}
+                {{ error }}
+              {% endfor %}
+            </span>
+          {% endif %}
+        </div>
+        
+        {% if field.name == 'cover' and field.value.url %}
+          <div class="span-2">
+            <img src="{{ field.value.url }}" alt="Capa para {{ recipe.title }}">
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="form-content">
+      <div class="form-group">
+        <button class="btn" type="submit">Submit</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+{% endblock content %}
