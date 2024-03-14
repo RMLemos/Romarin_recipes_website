@@ -1,0 +1,26 @@
+<button class="button-show-menu button-show-menu-visible">
+  ☰
+  <span class="hidden-text">Show menu</span>
+</button>
+
+<div class="menu-container menu-hidden">
+  <button class="button-close-menu button-close-menu-visible">
+    &#10005;
+    <span class="hidden-text">Close menu</span>
+  </button>
+
+  <div class="menu-content">
+    <nav class="menu-nav">
+
+      {% if user.is_authenticated %}
+        <a href="{% url 'authors:dashboard_recipe_new' %}">Add recipe</a>
+        <a href="{% url 'authors:dashboard' %}">My recipes</a>
+        <a href="{% url 'authors:logout' %}">Logout</a>
+        {% include 'authors/form_logout.html' %}
+      {% else %}
+        <a href="{% url 'authors:login' %}">Login</a>
+        <a href="{% url 'authors:register' %}">Register</a>
+    {% endif %}
+    </nav>
+  </div>
+</div>

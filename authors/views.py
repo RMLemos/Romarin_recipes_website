@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.http import Http404
 from authors.forms import LoginForm, RegisterForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib import messages
@@ -18,7 +18,7 @@ def register(request):
 
         if form.is_valid():
             form.save()
-            return redirect('recipes:home')
+            return redirect('authors:login')
 
 
     return render(
@@ -45,6 +45,7 @@ def login_view(request):
 
             if authenticated_user is not None:
                 login(request, authenticated_user)
+                return redirect('authors:dashboard')
             else:
                 messages.error(request, 'Invalid credentials')
         else:
@@ -53,6 +54,20 @@ def login_view(request):
     return render(request, 'authors/login.html', {
         'form': form,
     })
+
+
+@login_required(login_url='authors:login')
+def logout_view(request):
+    if not request.POST:
+        messages.error(request, 'Invalid logout request')
+        return redirect(reverse('authors:login'))
+
+    if request.POST.get('username') != request.user.username:
+        messages.error(request, 'Invalid logout user')
+        return redirect(reverse('authors:login'))
+
+    logout(request)
+    return redirect(reverse('recipes:home'))
 
 
 @login_required(login_url='authors:login')

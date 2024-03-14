@@ -11,9 +11,22 @@
 </head>
 <body>
     
+    {% include 'global/partials/menu.html' %}
     {% include 'global/partials/header.html' %}
     
-    {% block content %} {% endblock content %}
+    {% block content %} 
+
+    {% if messages %}
+    <div class="main-content center container messages-container">
+        {% for message in messages %}
+            <div class="message {{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    {% endblock content %}
 
     <main class="container pagination">
         {% if recipes.has_other_pages %}
