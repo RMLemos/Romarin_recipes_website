@@ -1,5 +1,5 @@
 ![Romarin Board Banner Image](/base_static/global/images/Githeader.jpg)
-<h2 align='center'>Contact Board</h2>
+<h2 align='center'>Romarin</h2>
 
 This project is a functional web applicaction in Python and Django. In this project there is a website where people can search for recipes by category or name of the recipe. Futhermore, there is a dashboard where we can add a recipe, update and/or delete them, that only will be published after consent of the administrators of the website
 
